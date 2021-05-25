@@ -9,6 +9,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
+      nodePort: 30080
   type: LoadBalancer
-  externalIPs:
-  - 192.168.54.11 
