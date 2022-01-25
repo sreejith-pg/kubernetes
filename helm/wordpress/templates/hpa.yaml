@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "apache.fullname" . }}
+  name: {{ include "wordpress.fullname" . }}
   labels:
-    {{- include "apache.labels" . | nindent 4 }}
+    {{- include "wordpress.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "apache.fullname" . }}
+    name: {{ include "wordpress.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
