@@ -1,0 +1,83 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: mysql-secrets
+  namespace: mysql-db
+spec:
+  encryptedData:
+    ROOT_PASSWORD: AgCTC4T47wX4H+O9S+EVhWaySc/Z43oalMt4EOZO3xGwCDJWwoeNW2lwV2DSinBrt0R2unIFA7AuQ1PZyyyISIiCzdSCXzM4rpNcu9Z0Mkc1kDBq2rxDCCC0v6wL23kYjG5t+Vss6gh4RxRpU5LTph43ATmoRmjfFylUkbvYLqvzN9039lI8QeQiSHB5dfjhCgavAXnJ807aQCBrUXTGV/ktY9TitTo4I/1K38YQcj5gWjxkseEs3JW5il/CUuQs6ClnUjIUidmshn9adFI90mPytNjiGkxrHlZwoo2IaTCKbgVgegXAUvqSfRC5yhEh9Sur9He6dHMsOi8YKEkCPRdE0OPq/rsPTe/TzPYaP0gc4tv4CkBvAd8YuMMnwWThexlEsDj7XuS/qib3Wxuf4gaQpO6ifWjhWyWIOrhTStjfhWgU6oy0IX//rPalbsPe4J0Y57pvo9UeMkTEGIj/gZnvJj83upB1ayEaeDYfIMjkQGvyF+SVsfOd8AwN0xeEEmW4Y3uHs1bsP+UIKtLuXzstfFy6ZRrLXblSDb0cYU8zgH3XesXfQrX+4SubVmQmLfZxY9Zl1/stQmoTgq8v7VgTfGerzIRJlAIj1jfnde0tMK5Px2e9J+ZFC58sAsE9TjhgYuqyTt4xHR09+Ova3dEJyUlY/Wg1qz66BtsuXlsVzle7zGUspB+FPZs1ijheb1lbgb1ULbW6fQ==
+  template:
+    data: null
+    metadata:
+      creationTimestamp: null
+      name: mysql-secrets
+      namespace: mysql-db
+    type: Opaque
+  
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-data-disk
+  namespace: mysql-db
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+          
+---       
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  namespace: mysql-db
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - mountPath: "/var/lib/mysql"
+              subPath: "mysql"
+              name: mysql-data
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: ROOT_PASSWORD
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-data-disk
+                        
+                        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: mysql-db
+spec:
+  selector:
+    app: mysql
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
