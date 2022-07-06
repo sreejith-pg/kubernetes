@@ -1,0 +1,18 @@
+{{- range $apps := .Values.infraapps }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $apps.name }} 
+  namespace: {{ $apps.namespace }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ $apps.namespace }}
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: {{ $apps.path }} 
+    repoURL: https://github.com/sreejith-pg/helmcharts.git
+    targetRevision: master
+{{ -end }}

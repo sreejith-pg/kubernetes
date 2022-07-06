@@ -1,0 +1,11 @@
+infraapps:
+  - name: kubewatch
+    namespace: infra-vst-kubewatch
+    values: values.yaml
+    path: kubewatch
+    rev: master
+  - name: metrics-server
+    namespace: infra-vst-metricsserver
+    values: values.yaml
+    path: metrics-server
+    rev: master
