@@ -15,4 +15,4 @@ spec:
     path: {{ $apps.path }} 
     repoURL: https://github.com/sreejith-pg/helmcharts.git
     targetRevision: master
-{{ -end }}
+{{ end }}
