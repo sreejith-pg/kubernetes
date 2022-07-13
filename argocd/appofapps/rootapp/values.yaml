@@ -1,3 +1,4 @@
+apps: []
 infraapps:
   - name: kubewatch
     namespace: infra-vst-kubewatch
