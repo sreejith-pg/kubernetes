@@ -1,7 +1,7 @@
 apps: []
 infraapps:
   - name: kubewatch
-    namespace: infra-vst-kubewatch
+    namespace: infra-kubewatch
     values: values.yaml
     path: kubewatch
     rev: master
