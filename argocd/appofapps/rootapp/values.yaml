@@ -6,7 +6,7 @@ infraapps:
     path: kubewatch
     rev: master
   - name: metrics-server
-    namespace: infra-vst-metricsserver
+    namespace: infra-metricsserver
     values: values.yaml
     path: metrics-server
     rev: master
