@@ -12,7 +12,7 @@ spec:
         namespace: infra-metricsserver
   template:
     metadata:
-      name: '{{appname}}'
+      name: '{{ appname }}'
 #      annotations:
 #        argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
