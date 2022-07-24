@@ -13,8 +13,8 @@ spec:
   template:
     metadata:
       name: '{{appname}}'
-  #    annotations:
-  #      argocd.argoproj.io/manifest-generate-paths: ".;.."
+      annotations:
+        argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
       project: default
       source:
