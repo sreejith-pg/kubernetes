@@ -1,38 +1,39 @@
----
-apiVersion: argoproj.io/v1alpha1
+apiVersion: [argoproj.io/v1alpha1](http://argoproj.io/v1alpha1)
 kind: ApplicationSet
 metadata:
-  name: rootappset
+  name: alldeployments
+  namespace: infra-argocd
 spec:
-  generators:
-  - list:
-      elements:
-      - appname: kubewatch
-        namespace: infra-kubewatch
-      - appname: metrics-server
-        namespace: infra-metricsserver
+  generators:  
+    - list:
+        elements:
+        - repoURL: https://gitlab.com/cadsfs/csa.git
+          targetRevision: demo
+          path: devops/k8s-manifests/demo/frontend         
+          name: front
+        - chart: cadence-server
+          targetRevision: 0.1.4 
+          repoURL:  https://gitlab.com/api/v4/projects/33509869/packages/helm/stable
+          name: 'cs'
+        - chart: edge-stack
+          targetRevision: 7.3.4 
+          repoURL:  https://gitlab.com/api/v4/projects/33509869/packages/helm/stable
+          name: 'es'
+        - chart: cadence-worker-service
+          targetRevision: 0.1.5
+          repoURL:  https://gitlab.com/api/v4/projects/33509869/packages/helm/stable
+          name: 'cws'
   template:
-    metadata:
-      name: '{{ appname }}'
-#      annotations:
-#        argocd.argoproj.io/manifest-generate-paths: ".;.."
-    spec:
-      project: default
-      source:
-        repoURL: https://github.com/sreejith-pg/helmcharts.git
-        targetRevision: main
-        path: '{{appname}}'
-#        helm:
-          # Release name override (defaults to application name)
-#          releaseName: '{{appname}}'
-#          valueFiles:
-#          - values.yaml
-      destination:
-        server: '{{ .Values.apps.k8sserver }}'
-        namespace: '{{namespace}}'
-#      syncPolicy:
-#        automated:
-#          prune: true
-#          selfHeal: true
-#        syncOptions:
-#          - CreateNamespace=true
+  metadata:
+    name: '{{name}}'
+  spec:
+    project: default
+    source:
+      repoURL: '{{repoURL}}' 
+      targetRevision: '{{targetRevision}}'
+      path: '{{path}}'
+      chart: '{{chart}}'
+     
+    destination:
+      server: https://kubernetes.default.svc/
+      namespace: infra-argocd
