@@ -24,16 +24,16 @@ spec:
           repoURL:  https://gitlab.com/api/v4/projects/33509869/packages/helm/stable
           name: 'cws'
   template:
-  metadata:
-    name: '{{name}}'
-  spec:
-    project: default
-    source:
-      repoURL: '{{repoURL}}' 
-      targetRevision: '{{targetRevision}}'
-      path: '{{path}}'
-      chart: '{{chart}}'
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: default
+      source:
+        repoURL: '{{repoURL}}' 
+        targetRevision: '{{targetRevision}}'
+        path: '{{path}}'
+        chart: '{{chart}}'
      
-    destination:
-      server: https://kubernetes.default.svc/
-      namespace: infra-argocd
+      destination:
+        server: https://kubernetes.default.svc/
+        namespace: infra-argocd
