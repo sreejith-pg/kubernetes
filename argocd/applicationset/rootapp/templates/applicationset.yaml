@@ -6,13 +6,13 @@ spec:
   generators:
   - list:
       elements:
-      - appName: kubewatch
+      - appname: kubewatch
         namespace: infra-kubewatch
-      - appName: metrics-server
+      - appname: metrics-server
         namespace: infra-metricsserver
   template:
     metadata:
-      name: "{{appName}}"
+      name: "{{appname}}"
   #    annotations:
   #      argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
@@ -20,10 +20,10 @@ spec:
       source:
         repoURL: https://github.com/sreejith-pg/helmcharts.git
         targetRevision: main
-        path: "{{appName}}"
+        path: "{{appname}}"
         helm:
           # Release name override (defaults to application name)
-#          releaseName: "{{appName}}"
+#          releaseName: "{{appname}}"
           valueFiles:
           - values.yaml
       destination:
