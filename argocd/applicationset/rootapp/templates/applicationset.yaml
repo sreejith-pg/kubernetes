@@ -27,7 +27,7 @@ spec:
 #          valueFiles:
 #          - values.yaml
       destination:
-        server: https://kubernetes.default.svc
+        server: '{{ .Values.apps.k8sserver }}'
         namespace: '{{namespace}}'
 #      syncPolicy:
 #        automated:

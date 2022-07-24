@@ -1,3 +1,5 @@
+apps:
+  - k8sserver: https://kubernetes.default.svc
 #infraapps:
 #  - name: kubewatch
 #    namespace: infra-kubewatch
