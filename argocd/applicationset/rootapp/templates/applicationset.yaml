@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: rootappset
+spec:
+  generators:
+  - list:
+      elements:
+      - appName: kubewatch
+        namespace: infra-kubewatch
+      - appName: metrics-server
+        namespace: infra-metricsserver
+  template:
+    metadata:
+      name: "{{appName}}"
+  #    annotations:
+  #      argocd.argoproj.io/manifest-generate-paths: ".;.."
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/sreejith-pg/helmcharts.git
+        targetRevision: main
+        path: "{{appName}}"
+        helm:
+          # Release name override (defaults to application name)
+          releaseName: "{{appName}}"
+          valueFiles:
+          - values.yaml
+      destination:
+        name: in-cluster
+        namespace: "{{namespace}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
