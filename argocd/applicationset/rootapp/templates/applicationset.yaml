@@ -1,39 +1,26 @@
-apiVersion: [argoproj.io/v1alpha1](http://argoproj.io/v1alpha1)
+apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: alldeployments
-  namespace: infra-argocd
+  name: guestbook
 spec:
-  generators:  
-    - list:
-        elements:
-        - repoURL: https://gitlab.com/cadsfs/csa.git
-          targetRevision: demo
-          path: devops/k8s-manifests/demo/frontend         
-          name: front
-        - chart: cadence-server
-          targetRevision: 0.1.4 
-          repoURL:  https://gitlab.com/api/v4/projects/33509869/packages/helm/stable
-          name: 'cs'
-        - chart: edge-stack
-          targetRevision: 7.3.4 
-          repoURL:  https://gitlab.com/api/v4/projects/33509869/packages/helm/stable
-          name: 'es'
-        - chart: cadence-worker-service
-          targetRevision: 0.1.5
-          repoURL:  https://gitlab.com/api/v4/projects/33509869/packages/helm/stable
-          name: 'cws'
+  generators:
+  - list:
+      elements:
+      - cluster: engineering-dev
+        url: https://1.2.3.4
+      - cluster: engineering-prod
+        url: https://2.4.6.8
+      - cluster: finance-preprod
+        url: https://9.8.7.6
   template:
     metadata:
-      name: '{{name}}'
+      name: '{{cluster}}-guestbook'
     spec:
       project: default
       source:
-        repoURL: '{{repoURL}}' 
-        targetRevision: '{{targetRevision}}'
-        path: '{{path}}'
-        chart: '{{chart}}'
-     
+        repoURL: https://github.com/argoproj/argo-cd.git
+        targetRevision: HEAD
+        path: applicationset/examples/list-generator/guestbook/{{cluster}}
       destination:
-        server: https://kubernetes.default.svc/
-        namespace: infra-argocd
+        server: '{{url}}'
+        namespace: guestbook
