@@ -1,8 +1,8 @@
 FROM python:2.7.18
 LABEL AUTHOR="Sreejith"
 WORKDIR /app
-COPY ../requirements.txt .
-COPY manage.py .
+COPY requirements.txt .
+COPY notejam/manage.py .
 RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
 COPY . .
 RUN chmod +x pre-flight.sh
