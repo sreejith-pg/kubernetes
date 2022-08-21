@@ -22,11 +22,11 @@ ingress: test5.example.com
 # Resources  
 resources:
   limits:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 20m
+    memory: 200Mi
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 10m
+    memory: 100i
 
 # Autoscaling
 autoscaling:
