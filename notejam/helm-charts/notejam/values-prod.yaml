@@ -1,0 +1,53 @@
+# General
+appname: notejam
+env: prod
+replicaCount: 2
+
+# Image
+image:
+  repository: sreejithpg
+  name: notejam
+  tag: "1.0"
+
+# Service Account
+serviceAccount:
+  create: true
+  name: "notejam"
+
+# Ingress Resource
+ingress: test4.example.com
+
+# Resources  
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# Autoscaling
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+# Sealed Secrets
+#applicationSecrets:
+#  path: /secrets
+#  username: AgBGP87pZe/TsuRKMYS7UM+aMVd3hjE3BWgmvqlSQl41gH7JHgBlF18YZFNP96OCkl0pm4aMk4Fo259jtGZUJvbvehwRpZegQqVBLbH9O/8PfXRokEgGfp2qfYGfX6pt5Cop2CR9Wk9YvPJjDA69Ho3MY2lNDsG8jiWrqL1dw7drK3A9iSpPU5QLFObSVLKW5UeiCrcNbJ2asefcbU6zHgY/0G/RYh6YEZ+4skd7f6JG2E9NtNC63v2/hbn7nBVSms+guZpYEZAuaZi+BGWwzXOVBbDNpobnSGjPmP6jqEdfqEREPKGWFLKVHkYdiPvJSPgVQj9BrTvS3Zq6QaL8caLno2rUdyHkcP2XnfrJ6SgjGOtzGbmwsLgoBM4LUZ33f5V9J4pi5qPLS1UhGqqARNfmtqZF3a0CpAp4cCShllgXzNcfQ5wG+OUsOhi7HZRpRdX3RxOPKikjJ4T+6JzQPV0RqBGWkfn6Y2HH1sQtzaxlCDaYc5rbKy4jjBvHF2BpTGI0YseZBZ8ktNmqYQuHmk/qDEa4EpxyjaUWkPSKIu4YuyrHwAQEh9WcOmkvpcpymFH/obruZGN11W3cJMCyQh8se1J0K+2WUrhL3FMpOqtJBndorHasXSnxv2bFnt0UE2qReZmDCRsQUdWEEcRPYjocVAj4sZpEWa8ScPsqCB75iDLmdhikzzrWUVnp5saSOSkB5+JS3Fk=
+#  password: AgAa0ECFBxBkpm50pVsqgsA6jTrBYrtwz0Psg8VwHHUBJjBQpj/zAcU3lwILBvlHxlEb6+f9+tm67by1ezQj7v/TofqEdDu1pczzuQ0oslR2L917zIeNMUyhB1cbtb3F4iEvPSKkCytdyIHPU2f6cQ7DA75rnJWpFSfkWRZ71/mXvNcsqJUithSqYkNvtA352MUwpZ09C2YVXsyJgNla3LEbkSQZEdwi2LhAEd+45VzwaNjHbLSTp9h1WA3UZSTC278I5m5todcCqekXb4HvDMhRia8+Oej/fQKwIzpYvsa3PVtYxPRFmSeV2uMkzCRJrvvBG8w7a9ZqLfme1bZJOYvhx37barFrKjqGI3gJ6SlmoZ9ECGnGiVbrid5rF0uv2sjems9Mn08CaPdLHK9ZGNogMkHYkwot24hdtj+aVE5PRKFFWO5dIdb0nWjDKMFUUle0cSSb+/hRYguTr28DLOvTC0erS1H2OnbFVKpWK6FKEy3x38Xr+n6OigMY/VZfGx2uNLpoU59YZXpUbfREgE7tf981DVbrOamwgrZgT5nXcetImkaKQxbvPuX6XJ52qLzRFSTxsp+a/iAZJ3DDMx5I76VYkfRrHs6GJTcUY5rN3oW64ugditKdAH8d3TFXNyGWAcbHvnVrBiuF24KAIebvb4fOMPuJPSx4hE0aeWKFkB2gSgVl9nkM2R2nloEtmXx3Ox2mDiotQJU=
+
+# Configs folder
+#applicationConfigs:
+#  path: /config
+
+#applicationProperties: |
+  # security
+#  spring.security.basic.enabled=false
+#  management.security.enabled=false
+#  api.secret=secret
+#  api.clients=client
+#  spring.security.oauth2.resourceserver.jwt.issuer-uri= http://127.0.0.1:8446
