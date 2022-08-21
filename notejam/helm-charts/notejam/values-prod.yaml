@@ -2,6 +2,8 @@
 appname: notejam
 env: prod
 replicaCount: 2
+port: 80
+targetport: 8000
 
 # Image
 image:
@@ -11,7 +13,7 @@ image:
 
 # Service Account
 serviceAccount:
-  create: true
+  create: false
   name: "notejam"
 
 # Ingress Resource
