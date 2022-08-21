@@ -21,11 +21,11 @@ spec:
         image: {{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag }}
         ports:
         - containerPort: 8000
-        volumeMounts:
-        - name: application-configs
-          mountPath: {{ .Values.applicationConfigs.path }}
-          readOnly: true
-      volumes:
-      - name: application-configs
-        configMap:
-          name: {{ .Values.appname }}-configs
+#        volumeMounts:
+#        - name: application-configs
+#          mountPath: {{ .Values.applicationConfigs.path }}
+#          readOnly: true
+#      volumes:
+#      - name: application-configs
+#        configMap:
+#          name: {{ .Values.appname }}-configs

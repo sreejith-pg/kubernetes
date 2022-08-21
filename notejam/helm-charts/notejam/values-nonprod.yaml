@@ -2,6 +2,8 @@
 appname: notejam
 env: dev
 replicaCount: 2
+port: 80
+targetport: 8000
 
 # Image
 image:
@@ -11,7 +13,7 @@ image:
 
 # Service Account
 serviceAccount:
-  create: true
+  create: false
   name: "notejam"
 
 # Ingress Resource
@@ -44,10 +46,10 @@ autoscaling:
 #applicationConfigs:
 #  path: /config
 
-applicationProperties: |
-  # security
-  spring.security.basic.enabled=false
-  management.security.enabled=false
-  api.secret=secret
-  api.clients=client
-  spring.security.oauth2.resourceserver.jwt.issuer-uri= http://127.0.0.1:8446
+#applicationProperties: |
+#  # security
+#  spring.security.basic.enabled=false
+#  management.security.enabled=false
+#  api.secret=secret
+#  api.clients=client
+#  spring.security.oauth2.resourceserver.jwt.issuer-uri= http://127.0.0.1:8446
