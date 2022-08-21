@@ -19,14 +19,14 @@ serviceAccount:
 # Ingress Resource
 ingress: test4.example.com
 
-# Resources  
+# Resources
 resources:
   limits:
-    cpu: 20m
-    memory: 200Mi
+    cpu: "20m"
+    memory: "200Mi"
   requests:
-    cpu: 10m
-    memory: 100Mi
+    cpu: "10m"
+    memory: "100Mi"
 
 # Autoscaling
 autoscaling:
