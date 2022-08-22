@@ -9,7 +9,7 @@ targetport: 8000
 image:
   repository: sreejithpg
   name: notejam
-  tag: "1.0"
+  tag: "1.0.0"
 
 # Service Account
 serviceAccount:
