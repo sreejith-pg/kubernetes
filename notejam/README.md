@@ -38,13 +38,13 @@ Azure Log Analytics workspace can help to log data from Azure Monitor which acts
 
 Azure blob storage is connected to PROD Kubernetes cluster for taking backup of necessary resources.
           
-![Notejan_Architecture-01.jpg](01-architecture/Notejan_Architecture-01.jpg)
+![Notejam_Architecture-01.jpg](01-architecture/Notejam_Architecture-01.jpg)
 
 
 The notejam application in new architecture can be implemented on Kubernetes as two deployments, one with notejam application and second one with any robust database (MySQL/PostgreSQL etc.) using persistent volumes. Network policy need to be implemented to secure deployments. 
 
 
-![Notejan_Architecture-02.jpg](01-architecture/Notejan_Architecture-02.jpg)
+![Notejam_Architecture-02.jpg](01-architecture/Notejam_Architecture-02.jpg)
 ## Directory Structure
    - 01-architecture
      - The directory contains 2 above architecture diagrams.
@@ -79,3 +79,8 @@ The notejam application in new architecture can be implemented on Kubernetes as 
 - Secret management using Azure Vault, Bitnami Sealed Secrets etc.
 - Updating environment variables of applications in configmaps rather than hard-coding.
 
+## Working Page
+
+The ingress created with helm chats is http://test5.example.com. Below screenshot is from my on-prem cluster.
+
+![Notejam_Working_Page.jpg](01-architecture/Notejam_Working_Page.jpg)
