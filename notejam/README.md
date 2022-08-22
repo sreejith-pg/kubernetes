@@ -81,6 +81,6 @@ The notejam application in new architecture can be implemented on Kubernetes as 
 
 ## Working Page
 
-The ingress created with helm chats is http://test5.example.com. Below screenshot is from my on-prem cluster.
+The ingress created with helm chats for non-PROD application is http://test5.example.com. Below screenshot is from my on-prem cluster.
 
 ![Notejam_Working_Page.jpg](01-architecture/Notejam_Working_Page.jpg)
